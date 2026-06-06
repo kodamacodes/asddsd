@@ -3,6 +3,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const imageCards = document.querySelectorAll('.image-card');
     let selectedMode = null;
 
+    // Aplicar imagen de fondo desde CONFIG
+    if (CONFIG.urlFondo) {
+        document.documentElement.style.setProperty('--bg-image', `url('${CONFIG.urlFondo}')`);
+    }
+
     // Función para seleccionar una opción
     function selectOption(card) {
         // Remover selección previa
@@ -20,14 +25,9 @@ document.addEventListener('DOMContentLoaded', () => {
             navigator.vibrate(40);
         }
         
-        // Animación de selección y navegación
-        card.style.transform = 'translateY(-12px) scale(1.05)';
-        setTimeout(() => {
-            card.style.transform = '';
-            // Navegar a la URL configurada
-            const url = mode === 'color' ? CONFIG.urlColor : CONFIG.urlBW;
-            if (url) window.location.href = url;
-        }, 420);
+        // Navegar a la URL configurada
+        const url = mode === 'color' ? CONFIG.urlColor : CONFIG.urlBW;
+        if (url) window.location.href = url;
     }
 
     // Botón de regresar
